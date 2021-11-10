@@ -1,11 +1,45 @@
 #include <stdio.h>
+#include <conio.h>
+#include <Windows.h>
+#define HEIGHT 10
+#define WIDTH 10
+#define LEFT 75
+#define RIGHT 77
+#define UP 72
+#define DOWN 80
 
-void main(void)
+void gotoxy(int x, int y) {
+	COORD Pos = { x - 1, y - 1 };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+}
 
+void keyboard(void) {
+	int x = 1;
+	int y = 1;
+	gotoxy(x, y);
+	while (1) {
+		if (GetAsyncKeyState(VK_LEFT)) { //왼쪽
+			x--;
+		}
+		if (GetAsyncKeyState(VK_RIGHT)) { //오른쪽
+			x++;
+		}
+		if (GetAsyncKeyState(VK_UP)) { //위
+			y--;
+		}
+		if (GetAsyncKeyState(VK_DOWN)) { //아래
+			y++;
+		}
 
-{
+		system("cls");
+		gotoxy(x, y);
+		printf("♥");
+	}
+}
 
-	int map[10][10] = {
+int main(void) {
+	// 게임판
+	int map[HEIGHT][WIDTH] = {
 
 	{ 1,1,1,1,1,1,1,1,1,1 },
 
@@ -23,11 +57,11 @@ void main(void)
 
 	{ 1,0,0,0,0,0,0,0,0,1 },
 
-	{ 1,1,1,1,1,1,1,1,1,1 } };
+	{ 1,1,1,1,1,1,1,1,1,1 }
+
+	};
 
 	int i, j;
-
-
 
 	for (i = 0; i < 10; i++)
 
@@ -55,7 +89,6 @@ void main(void)
 
 	}
 
-
-
+	keyboard();
 }
 
