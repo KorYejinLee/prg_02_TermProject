@@ -8,37 +8,8 @@
 #define UP 72
 #define DOWN 80
 
-void gotoxy(int x, int y) {
-	COORD Pos = { x - 1, y - 1 };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
-}
-
-void keyboard(void) {
-	int x = 1;
-	int y = 1;
-	gotoxy(x, y);
-	while (1) {
-		if (GetAsyncKeyState(VK_LEFT)) { //왼쪽
-			x--;
-		}
-		if (GetAsyncKeyState(VK_RIGHT)) { //오른쪽
-			x++;
-		}
-		if (GetAsyncKeyState(VK_UP)) { //위
-			y--;
-		}
-		if (GetAsyncKeyState(VK_DOWN)) { //아래
-			y++;
-		}
-
-		system("cls");
-		gotoxy(x, y);
-		printf("♥");
-	}
-}
-
-int main(void) {
-	// 게임판
+// 게임판
+void map(void) {
 	int map[HEIGHT][WIDTH] = {
 
 	{ 1,1,1,1,1,1,1,1,1,1 },
@@ -88,7 +59,42 @@ int main(void) {
 		printf("\n");
 
 	}
+}
 
+// 방향키 조정
+void gotoxy(int x, int y) {
+	COORD Pos = { x - 1, y - 1 };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+}
+
+void keyboard(void) {
+	int x = 1;
+	int y = 1;
+	gotoxy(x, y);
+	while (1) {
+		if (GetAsyncKeyState(VK_LEFT)) { //왼쪽
+			x--;
+		}
+		if (GetAsyncKeyState(VK_RIGHT)) { //오른쪽
+			x++;
+		}
+		if (GetAsyncKeyState(VK_UP)) { //위
+			y--;
+		}
+		if (GetAsyncKeyState(VK_DOWN)) { //아래
+			y++;
+		}
+
+		system("cls");
+		map();
+		gotoxy(x, y);
+		printf("♥");
+	}
+}
+
+int main(void) {
+
+	map();
 	keyboard();
 }
 
